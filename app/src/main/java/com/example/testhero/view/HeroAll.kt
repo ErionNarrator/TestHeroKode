@@ -11,13 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,8 +28,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -47,14 +43,7 @@ fun HeroAll(navController: NavController, viewModel: MainViewModel = viewModel()
     val posts by viewModel.heros.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
 
-    val expanded by remember { mutableStateOf(false)}
-    val selectedPublisher by remember { mutableStateOf("All") }
 
-    val publishers = remember(posts) {
-        mutableListOf("All").apply {
-            posts?.map { it.biography.publisher }?.distinct()?.let { addAll(it) }
-        }
-    }
 
     Box{
         Column {

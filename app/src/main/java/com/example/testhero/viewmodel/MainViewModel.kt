@@ -27,19 +27,5 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-    private val _currentHero = MutableStateFlow<Superhero?>(null)
-    val currentHero: StateFlow<Superhero?> = _currentHero
 
-    fun getHeroById(id: Int) {
-        viewModelScope.launch {
-            try {
-                val hero = RetrofitInstance.apiServer.getProductById(id)
-                _currentHero.value = hero
-                _errorMessage.value = null
-            } catch (e: Exception) {
-                _currentHero.value = null
-                _errorMessage.value = "Error fetching hero details: ${e.message}"
-            }
-        }
-    }
 }
